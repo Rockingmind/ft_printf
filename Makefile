@@ -34,12 +34,11 @@ NAME= libftprintf
 
 all: $(NAME)
 
-
 $(NAME): $(OBJ_LIB) $(OBJ)
 	ar rc libftprintf.a $(OBJ) $(OBJ_LIB)
 	ranlib libftprintf.a
 
-$(OBJ_LIB): %.o: %.c
+./libft/%.o: ./libft/%.c
 	$(CC) ${CFLAGS} -I=${INCL_LIB} -c $< -o $@ 
 
 $(OBJ): %.o: %.c
@@ -47,7 +46,7 @@ $(OBJ): %.o: %.c
 
 clean:
 	rm -f *.o
-	rm -f libft/*.o
+	rm -f ./libft/*.o
 
 fclean: clean
 	rm -f $(NAME)
