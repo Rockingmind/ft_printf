@@ -8,6 +8,7 @@ int 	coun(unsigned int num)
 {
 	int i;
 
+	i = 0;
 	while ((num /= 16))
 		i++;
 	return (i + 1);

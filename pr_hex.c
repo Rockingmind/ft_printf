@@ -8,6 +8,7 @@ int 	count_h(unsigned int num)
 {
 	int i;
 
+	i = 0;
 	while ((num /= 16))
 		i++;
 	return (i + 1);

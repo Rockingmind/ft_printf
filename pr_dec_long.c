@@ -25,13 +25,13 @@ char	*pr_dec_long(long num, int plus)
 		size++;
 	s = ft_strnew(size + 1);
 	if (plus == 1)
-		if (num < 0)
-		{
+	{
+		if (num < 0) {
 			s[i++] = '-';
 			num *= -1;
-		}
-		else
+		} else
 			s[i++] = '+';
+	}
 	while (size--)
 	{
 		s[i] = (int)(num / ft_pow(10, size)) + '0';

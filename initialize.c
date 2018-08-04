@@ -38,6 +38,7 @@ int		numbers(t_flags **flags, char *s)
 		(*flags)->precision = ft_atoi(s);
 		return (ft_count_digits((*flags)->precision));
 	}
+	return (0);
 }
 
 char	*type_flag(t_flags **flags, char *s)
