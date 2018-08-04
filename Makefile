@@ -26,22 +26,19 @@ SRC=./fl_minus.c \
 	./pr_unsigned_int.c \
 	./right_align.c
 INCL=./ft_printf.h
-INCL_LIB= ./libft/includes/%.h
+INCL_LIB= ./libft/includes/libft.h
 OBJ= $(SRC:.c=.o)
-SRC_LIB= ./libft/*.c
-OBJ_LIB= $(SRC_LIB:.c=.o)
-NAME= libftprintf
+NAME= libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ_LIB) $(OBJ)
-	ar rc libftprintf.a $(OBJ) $(OBJ_LIB)
-	ranlib libftprintf.a
+$(NAME): $(OBJ)
+	make -C libft/ fclean && make -C libft/
+	cp libft/libft.a $(NAME)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
-./libft/%.o: ./libft/%.c
-	$(CC) ${CFLAGS} -I=${INCL_LIB} -c $< -o $@ 
-
-$(OBJ): %.o: %.c
+$(OBJ):%.o: %.c
 	$(CC) ${CFLAGS} -I=${INCL} -c $< -o $@ 
 
 clean:
