@@ -47,8 +47,9 @@ $(OBJ): %.o: %.c
 
 clean:
 	rm -f *.o
+	rm -f libft/*.o
 
 fclean: clean
-	rm -f 
+	rm -f $(NAME)
 
 re: fclean all
