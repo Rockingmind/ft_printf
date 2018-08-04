@@ -41,7 +41,8 @@ SRC=./fl_minus.c \
 	./libft/ft_strcat.c \
 	./libft/ft_strcpy.c \
 	./libft/ft_itoa.c \
-
+	./libft/ft_isspace.c \
+	./libft/ft_memset.c
 INCL=./ft_printf.h
 INCL_LIB= ./libft/includes/libft.h
 OBJ= $(SRC:.c=.o)
