@@ -24,7 +24,24 @@ SRC=./fl_minus.c \
 	./pr_octal.c \
 	./pr_string.c \
 	./pr_unsigned_int.c \
-	./right_align.c
+	./right_align.c \
+	./libft/ft_strlen.c \
+	./libft/ft_count_digits.c \
+	./libft/ft_putstr.c \
+	./libft/ft_strnew.c \
+	./libft/ft_isdigit.c \
+	./libft/ft_strdup.c \
+	./libft/ft_strjoin.c \
+	./libft/ft_fill_new.c \
+	./libft/ft_writetil.c \
+	./libft/ft_atoi.c \
+	./libft/ft_bzero.c \
+	./libft/ft_pow.c \
+	./libft/ft_putchar.c \
+	./libft/ft_strcat.c \
+	./libft/ft_strcpy.c \
+	./libft/ft_itoa.c \
+
 INCL=./ft_printf.h
 INCL_LIB= ./libft/includes/libft.h
 OBJ= $(SRC:.c=.o)
@@ -33,8 +50,8 @@ NAME= libftprintf.a
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C libft/ fclean && make -C libft/
-	cp libft/libft.a $(NAME)
+	# make -C libft/ fclean && make -C libft/
+	# cp libft/libft.a $(NAME)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
