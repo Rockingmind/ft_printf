@@ -4,16 +4,6 @@
 
 #include "ft_printf.h"
 
-int 	count_unsign(unsigned int num)
-{
-	int i;
-
-	i = 0;
-	while (num /= 10)
-		i++;
-	return (i + 1);
-}
-
 char	*pr_unsigned_int(unsigned int num)
 {
 	int i;
@@ -21,7 +11,7 @@ char	*pr_unsigned_int(unsigned int num)
 	char *s;
 
 	i = 0;
-	size = count_unsign(num);
+	size = count(num, 10);
 	s = ft_strnew(size + 1);
 	while (size--)
 	{

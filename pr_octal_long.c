@@ -1,11 +1,10 @@
 //
-// Created by Tania PYROGOVSKA on 7/24/18.
+// Created by Tania PYROGOVSKA on 8/4/18.
 //
 
 #include "ft_printf.h"
 
-char	*pr_octal(unsigned int num, int hash)
-{
+char	*pr_octal_long(unsigned long num, int hash) {
 	int size;
 	char *s;
 	int i;
@@ -15,9 +14,8 @@ char	*pr_octal(unsigned int num, int hash)
 	if (hash == 1)
 		size++;
 	s = ft_strnew(size + 1);
-	while (size--)
-	{
-		s[i] = (int)(num / ft_pow(8, size)) + '0';
+	while (size--) {
+		s[i] = (int) (num / ft_pow(8, size)) + '0';
 		num %= ft_pow(8, size);
 		i++;
 	}

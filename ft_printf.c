@@ -6,35 +6,42 @@
 
 char	*other_types(t_flags *flags, char s, va_list ap)
 {
+	char *str;
+
 	if (s == 'o')
-		return (pr_octal(va_arg(ap, unsigned int), flags->hash));
-//	else if (s == 'O')
-//		return ();
+		return (octal_type(ap, flags));
+	else if (s == 'O')
+		return (pr_octal_long(va_arg(ap, unsigned long), flags->hash));
 	else if (s == 'x')
-		return (pr_hex(va_arg(ap, unsigned int), flags->hash));
-//	else if (s == 'X')
-//		return ();
+		return (hex_type(ap, flags, 0));
+	else if (s == 'X')
+		return (hex_type(ap, flags, 1));
 	else if (s == 'u')
-		return (pr_unsigned_int(va_arg(ap, unsigned int)));
-//	else if (s == 'U')
-//		return ();
+		return (unsigned_type(ap, flags));
+	else if (s == 'U')
+		return (pr_unsigned_long(va_arg(ap, unsigned long)));
 	else if (s == 'p')
 		return (pr_addr((long)va_arg(ap, void *)));
-//	else
-//		return (&s);
-	return (0);
+	else
+	{
+		str = ft_strnew(sizeof(char)*2);
+		str[0] = s;
+		str[1] = '\0';
+		return (str);
+	}
 }
 
-char	*make_string(t_flags *flags, char s, va_list ap) {
+char	*make_string(t_flags *flags, char s, va_list ap)
+{
 
 	if (s == '%')
 		return (pr_char('%'));
 	else if (s == 'd' || s == 'i')
-		return (pr_dec(va_arg(ap, int), flags->plus));
-//	else if (s == 'c')
+		return (dec_type(ap, flags));
+	else if (s == 'c')
 //		return (pr_char(va_arg(ap, char)));
 //	else if (s == 'C')
-//		return ();
+		return (pr_char_locale(va_arg(ap, char)));
 	else if (s == 's')
 		return (pr_string(va_arg(ap, char *)));
 //	else if (s == 'S')
@@ -43,24 +50,23 @@ char	*make_string(t_flags *flags, char s, va_list ap) {
 		return (pr_dec_long(va_arg(ap, long), flags->plus));
 	else
 		return (other_types(flags,s, ap));
-	return (0);
 }
 
 int		process(va_list ap, char *format, char **result)
 {
 	char	*save;
 	char	*str;
-	char	*flag;
+	char	*form;
 	t_flags	*flags;
 
 	flags = init_flags();
 	save = ft_strdup(*result);
 	free(*result);
-	flag = width_format(&flags, format + 1);
-	str = make_string(flags, *(flag ), ap);
-	manage_format(flags, &str);
+	form = width_format(&flags, format + 1);
+	if ((str = make_string(flags, *(form), ap)) != NULL)
+		manage_format(flags, &str);
 	*result = ft_strjoin(save, str);
-	return (ft_strlen(format) - ft_strlen(flag));
+	return (ft_strlen(format) - ft_strlen(form));
 }
 
 int		ft_printf(char *format, ...)
@@ -77,7 +83,7 @@ int		ft_printf(char *format, ...)
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-			i += process(ap, format, &result) + 1;
+			i += process(ap, format + i, &result) + 1;
 		else
 		{
 			save = ft_strdup(result);

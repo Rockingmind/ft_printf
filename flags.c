@@ -4,8 +4,15 @@
 
 #include "ft_printf.h"
 
-void	manage_format(t_flags *flags, char **str) {
+int 	suitable(char c)
+{
+	if (c == 'd' || c == 'i' || c == 'u' || c == 'o' || c == 'x' || c == 'X')
+		return (1);
+	return (0);
+}
 
+void	manage_format(t_flags *flags, char **str)
+{
 	if (flags->minus == 1 && (int)ft_strlen(*str) < flags->min_width)
 		fl_minus(flags, str);
 	if (flags->zero == 1 && (int)ft_strlen(*str) < flags->min_width)
@@ -16,4 +23,6 @@ void	manage_format(t_flags *flags, char **str) {
 		right_align(flags, str);
 	if (flags->space == 1 && (int)ft_strlen(*str) < flags->min_width)
 		right_align(flags, str);
+	if (flags->plus == 1)
+		plus(str);
 }

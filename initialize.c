@@ -86,7 +86,7 @@ char	*width_format(t_flags **flags, char *s)
 			(*flags)->zero = 1;
 		else if (ft_isdigit(*s) || *s == '.')
 			s += numbers(flags, s);
-		else if (*s == ' ' && *(s-1) == '%')
+		else if (*s == ' ')
 			(*flags)->space = 1;
 		else
 			break ;

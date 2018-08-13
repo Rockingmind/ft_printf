@@ -4,15 +4,7 @@
 
 #include "ft_printf.h"
 #include <stdio.h>
-int 	count_num(long num)
-{
-	int i;
 
-	i = 0;
-	while ((num /= 10))
-		i++;
-	return (i + 1);
-}
 char	*pr_dec_long(long num, int plus)
 {
 	char *s;
@@ -20,7 +12,7 @@ char	*pr_dec_long(long num, int plus)
 	int size;
 
 	i = 0;
-	size = count_num(num);
+	size = count(num, 10);
 	if (plus == 1)
 		size++;
 	s = ft_strnew(size + 1);
