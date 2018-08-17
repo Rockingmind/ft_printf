@@ -11,38 +11,14 @@
 #******************************************************************************#
 
 CFLGS= -Wall -Wextra -Werror
-SRC=./fl_minus.c \
-	./fl_zero.c \
-	./flags.c \
+SRC=./flags.c \
 	./ft_printf.c \
-	./initialize.c \
-	./pr_addr.c \
-	./pr_char.c \
-	./pr_dec.c \
-	./pr_dec_long.c \
-	./pr_hex.c \
-	./pr_octal.c \
-	./pr_string.c \
-	./pr_unsigned_int.c \
-	./right_align.c \
-	./libft/ft_strlen.c \
-	./libft/ft_count_digits.c \
-	./libft/ft_putstr.c \
-	./libft/ft_strnew.c \
-	./libft/ft_isdigit.c \
-	./libft/ft_strdup.c \
-	./libft/ft_strjoin.c \
-	./libft/ft_fill_new.c \
-	./libft/ft_writetil.c \
-	./libft/ft_atoi.c \
-	./libft/ft_bzero.c \
-	./libft/ft_pow.c \
-	./libft/ft_putchar.c \
-	./libft/ft_strcat.c \
-	./libft/ft_strcpy.c \
-	./libft/ft_itoa.c \
-	./libft/ft_isspace.c \
-	./libft/ft_memset.c
+	./init_flags.c \
+	./helpers.c \
+	./put_nbr_base.c \
+	./types.c \
+	./print_characters.c \
+	./apply_format.c
 INCL=./ft_printf.h
 INCL_LIB= ./libft/includes/libft.h
 OBJ= $(SRC:.c=.o)
@@ -51,8 +27,8 @@ NAME= libftprintf.a
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	# make -C libft/ fclean && make -C libft/
-	# cp libft/libft.a $(NAME)
+	make -C libft/ fclean && make -C libft/
+	cp libft/libft.a $(NAME)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
@@ -65,5 +41,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f ./libft/libft.a
 
 re: fclean all

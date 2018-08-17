@@ -1,45 +1,49 @@
 //
-// Created by Tania PYROGOVSKA on 8/4/18.
+// Created by Tania PYROGOVSKA on 8/13/18.
 //
 
 #include "ft_printf.h"
 
-int		count(size_t num, int base)
+int			count(intmax_t x, int base)
 {
-	int i;
+	int res;
 
-	i = 0;
-	while ((num /= base))
-		i++;
-	return (i + 1);
+	res = 0;
+	while (x /= base)
+		res++;
+	return (res + 1);
 }
 
-size_t	power(size_t num, int pow)
+int			u_count(uintmax_t x, int base)
 {
-	size_t res;
+	int res;
 
-	res = 1;
-	while (pow--)
+	res = 0;
+	while (x /= base)
+		res++;
+	return (res + 1);
+}
+
+uintmax_t	power(uintmax_t num, int power)
+{
+	uintmax_t res;
+
+	res =  1;
+	while (power--)
 		res *= num;
 	return (res);
 }
 
-int		u_count(intmax_t num, int base)
+char	*to_upper(char *s)
 {
 	int i;
 
 	i = 0;
-	while ((num /= base))
+	while (s[i] != '\0')
+	{
+		s[i] = ft_toupper(s[i]);
 		i++;
-	return (i + 1);
+	}
+	return (s);
 }
 
-intmax_t	u_power(intmax_t num, int pow)
-{
-	size_t res;
-
-	res = 1;
-	while (pow--)
-		res *= num;
-	return (res);
-}

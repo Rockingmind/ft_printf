@@ -1,0 +1,75 @@
+//
+// Created by Tania PYROGOVSKA on 8/17/18.
+//
+
+#include "ft_printf.h"
+
+char	*mask1(unsigned int c, t_flags *flags)
+{
+	char	*s;
+
+	s = ft_strnew(1);
+	s[0] = c;
+	flags->cur = 1;
+	return (s);
+}
+
+char	*mask2(unsigned int c, t_flags *flags)
+{
+	char			*s;
+	unsigned char	o1;
+	unsigned char	o2;
+	unsigned int	mask;
+
+	mask = 49280;
+	s = ft_strnew(2);
+	o2 = (c << 26) >> 26;
+	o1 = ((c >> 6) << 27) >> 27;
+	s[0] = (mask >> 8) | o1;
+	s[1] = ((mask << 24) >> 24) | o2;
+	flags->cur = 2;
+	return (s);
+}
+
+char	*mask3(unsigned int c, t_flags *flags)
+{
+	char			*s;
+	unsigned int	mask;
+	unsigned char	o1;
+	unsigned char	o2;
+	unsigned char	o3;
+
+	mask = 14712960;
+	s = ft_strnew(3);
+	o3 = (c << 26) >> 26;
+	o2 = ((c >> 6) << 26) >> 26;
+	o1 = ((c >> 12) << 28) >> 28;
+	s[0] = (mask >> 16) | o1;
+	s[1] = ((mask << 16) >> 24) | o2;
+	s[2] = ((mask << 24) >> 24) | o3;
+	flags->cur = 3;
+	return (s);
+}
+
+char 	*mask4(unsigned int c, t_flags *flags)
+{
+	char *s;
+	unsigned int mask;
+	unsigned char o4;
+	unsigned char o3;
+	unsigned char o2;
+	unsigned char o1;
+
+	mask = 4034953344;
+	s = ft_strnew(4);
+	o4 = (c << 26) >> 26;
+	o3 = ((c >> 6) << 26) >> 26;
+	o2 = ((c >> 12) << 26) >> 26;
+	o1 = ((c >> 18) << 29) >> 29;
+	s[0] = (mask >> 24) | o1;
+	s[1] = ((mask << 8) >> 24) | o2;
+	s[2] = ((mask << 16) >> 24) | o3;
+	s[3] = ((mask << 24) >> 24) | o4;
+	flags->cur = 4;
+	return (s);
+}

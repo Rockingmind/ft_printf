@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "ft_printf.h"
-int main() {
-	char *s;
 
-	s = ft_strnew(1);
-	printf("%p\n", s);
-	ft_printf("%p\n", s);
-//	printf("kdfhdkf%05d", 10);
-//	ft_printf("%D", 1003);
+int main() {
+	int i;
+
+	i = ft_printf("sld;ka %c 67", '\0');
+	printf(" %d\n");
+	i = printf("sld;ka %c 67", '\0');
+	printf(" %d\n");
 	return 0;
 }

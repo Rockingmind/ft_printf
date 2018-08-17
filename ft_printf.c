@@ -1,99 +1,94 @@
-//
-// Created by Tania PYROGOVSKA on 7/20/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpyrogov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/13 14:45:52 by tpyrogov          #+#    #+#             */
+/*   Updated: 2018/08/13 14:45:55 by tpyrogov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*other_types(t_flags *flags, char s, va_list ap)
+char	*get_spec(va_list ap, char *str, t_flags *flags)
 {
+	if (*str == 's')
+		return (str_out(va_arg(ap, char *), flags));
+	else if (*str == 'S')
+		return (put_str_loc(va_arg(ap, wchar_t *), flags));
+	else if (*str == 'c')
+		return (put_char((char)va_arg(ap, int), flags));
+	else if (*str == 'C')
+		return (put_char_loc(va_arg(ap, wchar_t), flags));
+	else if (*str == 'p')
+		return (hex_type(ap, flags, 1));
+	else if (*str == 'O')
+		return (octal_type(ap, flags, 1));
+	else if (*str == 'U')
+		return (unsigned_type(ap, flags, 1));
+	else
+		return (put_char(*str, flags));
+}
+
+char	*find_type(va_list ap, char *str, t_flags *flags)
+{
+	if (*str == 'd' || *str == 'i')
+		return (dec_type(ap, flags, 0));
+	else if (*str == 'D')
+		return (dec_type(ap, flags, 1));
+	else if (*str == 'o')
+		return (octal_type(ap, flags, 0));
+	else if (*str == 'u')
+		return (unsigned_type(ap, flags, 0));
+	else if (*str == 'x')
+		return (hex_type(ap, flags, 0));
+	else if (*str == 'X')
+		return (to_upper(hex_type(ap, flags, 0)));
+	else
+		return (get_spec(ap, str, flags));
+}
+
+int		process(va_list ap, char *format, char **res, t_flags *flags)
+{
+	char *add;
+	char *save;
 	char *str;
 
-	if (s == 'o')
-		return (octal_type(ap, flags));
-	else if (s == 'O')
-		return (pr_octal_long(va_arg(ap, unsigned long), flags->hash));
-	else if (s == 'x')
-		return (hex_type(ap, flags, 0));
-	else if (s == 'X')
-		return (hex_type(ap, flags, 1));
-	else if (s == 'u')
-		return (unsigned_type(ap, flags));
-	else if (s == 'U')
-		return (pr_unsigned_long(va_arg(ap, unsigned long)));
-	else if (s == 'p')
-		return (pr_addr((long)va_arg(ap, void *)));
-	else
-	{
-		str = ft_strnew(sizeof(char)*2);
-		str[0] = s;
-		str[1] = '\0';
-		return (str);
-	}
-}
-
-char	*make_string(t_flags *flags, char s, va_list ap)
-{
-
-	if (s == '%')
-		return (pr_char('%'));
-	else if (s == 'd' || s == 'i')
-		return (dec_type(ap, flags));
-	else if (s == 'c')
-//		return (pr_char(va_arg(ap, char)));
-//	else if (s == 'C')
-		return (pr_char_locale(va_arg(ap, char)));
-	else if (s == 's')
-		return (pr_string(va_arg(ap, char *)));
-//	else if (s == 'S')
-//		return ();
-	else if (s == 'D')
-		return (pr_dec_long(va_arg(ap, long), flags->plus));
-	else
-		return (other_types(flags,s, ap));
-}
-
-int		process(va_list ap, char *format, char **result)
-{
-	char	*save;
-	char	*str;
-	char	*form;
-	t_flags	*flags;
-
-	flags = init_flags();
-	save = ft_strdup(*result);
-	free(*result);
-	form = width_format(&flags, format + 1);
-	if ((str = make_string(flags, *(form), ap)) != NULL)
-		manage_format(flags, &str);
-	*result = ft_strjoin(save, str);
-	return (ft_strlen(format) - ft_strlen(form));
+	save = ft_strdup(*res);
+	free(*res);
+	str = get_flags(format + 1, flags);
+	add = find_type(ap, str, flags);
+	apply_format(&add, flags);
+	*res = ft_stradd(save, add, flags->size, flags->cur);
+	flags->size += flags->cur;
+	return (ft_strlen(format) - ft_strlen(str));
 }
 
 int		ft_printf(char *format, ...)
 {
-	int		i;
-	char	*c;
-	char	*save;
+	va_list	ap;
+	t_flags	*flags;
 	char	*result;
-	va_list ap;
+	int		i;
 
-	va_start(ap, format);
+	i = 0;
+	flags = init_flags();
 	result = ft_strnew(ft_strlen(format));
-	i = ft_writetil(&result, format, '%');
+	va_start(ap, format);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-			i += process(ap, format + i, &result) + 1;
+			i += process(ap, format + i, &result, flags);
 		else
 		{
-			save = ft_strdup(result);
-			free(result);
-			c = &format[i];
-			result = ft_strjoin(save, c);
-			i += ft_strlen(c);
+			result[flags->size] = format[i];
+			flags->size++;
 		}
+		i++;
 	}
 	va_end(ap);
-	ft_putstr(result);
-	return ((int)ft_strlen(result));
+	ft_put_str(result, flags->size);
+	return (flags->size);
 }
