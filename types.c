@@ -90,6 +90,6 @@ char	*hex_type(va_list ap, t_flags *flags, int p)
 	else
 		s = put_nbr_base((long)va_arg(ap, void *), 16, flags);
 	if (flags->hash == 1)
-		hash(s, 1);
+		hash(&s, 1);
 	return (s);
 }

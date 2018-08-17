@@ -18,7 +18,10 @@ SRC=./flags.c \
 	./put_nbr_base.c \
 	./types.c \
 	./print_characters.c \
-	./apply_format.c
+	./apply_format.c \
+	./flags.c \
+	./ft_stradd.c \
+	./hendle_masks.c 
 INCL=./ft_printf.h
 INCL_LIB= ./libft/includes/libft.h
 OBJ= $(SRC:.c=.o)
