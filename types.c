@@ -7,7 +7,7 @@
 char	*dec_type(va_list ap, t_flags *flags, int caps)
 {
 	if (flags->ref == H)
-		return (put_nbr_base(va_arg(ap, short int), 10, flags));
+		return (put_nbr_base((short)va_arg(ap, int), 10, flags));
 	else if (flags->ref == HH)
 		return (put_nbr_base(va_arg(ap, signed int), 10, flags));
 	else if (flags->ref == L)
@@ -20,7 +20,7 @@ char	*dec_type(va_list ap, t_flags *flags, int caps)
 		return (put_nbr_base(va_arg(ap, intmax_t), 10, flags));
 	else if (flags->ref == NONE && caps == 1)
 		return (put_nbr_base(va_arg(ap, long), 10, flags));
-	else if (flags->ref == NONE && caps == 0)
+	else
 		return (put_nbr_base(va_arg(ap, int), 10, flags));
 }
 
@@ -29,9 +29,9 @@ char	*octal_type(va_list ap, t_flags *flags, int caps)
 	char *s;
 
 	if (flags->ref == H)
-		s = put_nbr_base(va_arg(ap, unsigned short int), 8, flags);
+		s = put_nbr_base((unsigned short)va_arg(ap, int), 8, flags);
 	else if (flags->ref == HH)
-		s = put_nbr_base(va_arg(ap, unsigned char), 8, flags);
+		s = put_nbr_base((unsigned char)va_arg(ap, int), 8, flags);
 	else if (flags->ref == L)
 		s = put_nbr_base(va_arg(ap, unsigned long int), 8, flags);
 	else if (flags->ref == LL)
@@ -52,9 +52,9 @@ char	*octal_type(va_list ap, t_flags *flags, int caps)
 char	*unsigned_type(va_list ap, t_flags *flags, int caps)
 {
 	if (flags->ref == H)
-		return (put_nbr_base(va_arg(ap, unsigned short int), 10, flags));
+		return (put_nbr_base((unsigned short)va_arg(ap, int), 10, flags));
 	else if (flags->ref == HH)
-		return (put_nbr_base(va_arg(ap, unsigned char), 10, flags));
+		return (put_nbr_base((unsigned char)va_arg(ap, int), 10, flags));
 	else if (flags->ref == L)
 		return (put_nbr_base(va_arg(ap, unsigned long int), 10, flags));
 	else if (flags->ref == LL)
@@ -65,7 +65,7 @@ char	*unsigned_type(va_list ap, t_flags *flags, int caps)
 		return (put_unsigned_nbr(va_arg(ap, uintmax_t), 10, flags));
 	else if (flags->ref == NONE && caps == 0)
 		return (put_nbr_base(va_arg(ap, unsigned int), 10, flags));
-	else if (flags->ref == NONE && caps == 1)
+	else
 		return (put_nbr_base(va_arg(ap, unsigned long), 10, flags));
 }
 
@@ -74,9 +74,9 @@ char	*hex_type(va_list ap, t_flags *flags, int p)
 	char *s;
 
 	if (flags->ref == H)
-		s = put_nbr_base(va_arg(ap, unsigned short int), 16, flags);
+		s = put_nbr_base((unsigned short)va_arg(ap, int), 16, flags);
 	else if (flags->ref == HH)
-		s = put_nbr_base(va_arg(ap, unsigned char), 16, flags);
+		s = put_nbr_base((unsigned char)va_arg(ap, int), 16, flags);
 	else if (flags->ref == L)
 		s = put_nbr_base(va_arg(ap, unsigned long int), 16, flags);
 	else if (flags->ref == LL)

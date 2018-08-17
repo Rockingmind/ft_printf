@@ -21,7 +21,9 @@ SRC=./flags.c \
 	./apply_format.c \
 	./flags.c \
 	./ft_stradd.c \
-	./hendle_masks.c 
+	./hendle_masks.c \
+	./libft/ft_fill_new.c \
+	./libft/ft_count_digits.c
 INCL=./ft_printf.h
 INCL_LIB= ./libft/includes/libft.h
 OBJ= $(SRC:.c=.o)
