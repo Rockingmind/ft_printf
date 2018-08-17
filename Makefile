@@ -19,7 +19,6 @@ SRC=./flags.c \
 	./types.c \
 	./print_characters.c \
 	./apply_format.c \
-	./flags.c \
 	./ft_stradd.c \
 	./hendle_masks.c \
 	./libft/ft_fill_new.c \
