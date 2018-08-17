@@ -13,9 +13,9 @@ char	*put_nbr_base(intmax_t num, int base, t_flags *flags)
 
 	i = 0;
 	size = count(num, base);
-	flags->cur = size;
 	if (num < 0)
 		size++;
+	flags->cur = size;
 	res = ft_strnew(size);
 	mask = ft_strdup("0123456789abcdef");
 	if (num < 0)
