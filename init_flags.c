@@ -18,15 +18,18 @@ t_flags	*init_flags(void)
 
 	flags = (t_flags *)malloc(sizeof(t_flags));
 	flags->ref = NONE;
+	flags->spec = NON;
 	flags->hash = 0;
 	flags->plus = 0;
 	flags->minus = 0;
 	flags->zero = 0;
-	flags->width = 0;
-	flags->precision = 0;
+	flags->width = -1;
+	flags->precision = -1;
 	flags->space = 0;
 	flags->size = 0;
 	flags->size = 0;
+	flags->neg = 0;
+	flags->mask = ft_strdup("0123456789abcdef");
 	return (flags);
 }
 
@@ -34,27 +37,32 @@ int		get_nums(char *format, t_flags *flags)
 {
 	int num;
 
-	if (*format == '.')
+	num = 0;
+	if (*format == '.' && ft_isdigit(*(format + 1)))
 	{
 		format++;
 		flags->precision = ft_atoi(format);
 		num = ft_count_digits(flags->precision + 1);
 	}
-	else
+	else if (ft_isdigit(*format))
 	{
 		flags->width = ft_atoi(format);
 		num = ft_count_digits(flags->width) - 1;
 	}
+	else
+		flags->precision = 0;
 	return (num);
 }
 
 char	*get_ref(char *format, t_flags *flags)
 {
 	if (*format == 'h')
-		if (*(format + 1) == 'h') {
+		if (*(format + 1) == 'h')
+		{
 			flags->ref = HH;
 			format++;
-		} else
+		}
+		else
 			flags->ref = H;
 	else if (*format == 'l')
 		if (*(format + 1) == 'l')
@@ -86,7 +94,7 @@ char	*get_flags(char *format, t_flags *flags)
 			flags->minus = 1;
 		else if (*format == ' ')
 			flags->space = 1;
-		else if (*format == '0')
+		else if (*format == '0' && *(format + 1) != '.')
 			flags->zero = 1;
 		else if (ft_isdigit(*format) || *format == '.')
 			format += get_nums(format, flags);

@@ -1,6 +1,14 @@
-//
-// Created by Tania PYROGOVSKA on 8/13/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpyrogov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/25 17:56:59 by tpyrogov          #+#    #+#             */
+/*   Updated: 2018/08/25 17:57:00 by tpyrogov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -28,13 +36,13 @@ uintmax_t	power(uintmax_t num, int power)
 {
 	uintmax_t res;
 
-	res =  1;
+	res = 1;
 	while (power--)
 		res *= num;
 	return (res);
 }
 
-char	*to_upper(char *s)
+char		*to_upper(char *s)
 {
 	int i;
 
@@ -46,4 +54,3 @@ char	*to_upper(char *s)
 	}
 	return (s);
 }
-

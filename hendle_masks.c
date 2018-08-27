@@ -1,6 +1,14 @@
-//
-// Created by Tania PYROGOVSKA on 8/17/18.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hendle_masks.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpyrogov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/08/25 17:57:54 by tpyrogov          #+#    #+#             */
+/*   Updated: 2018/08/25 17:57:56 by tpyrogov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -51,16 +59,14 @@ char	*mask3(unsigned int c, t_flags *flags)
 	return (s);
 }
 
-char 	*mask4(unsigned int c, t_flags *flags)
+char	*mask4(unsigned int c, t_flags *flags, unsigned int mask)
 {
-	char *s;
-	unsigned int mask;
-	unsigned char o4;
-	unsigned char o3;
-	unsigned char o2;
-	unsigned char o1;
+	char			*s;
+	unsigned char	o4;
+	unsigned char	o3;
+	unsigned char	o2;
+	unsigned char	o1;
 
-	mask = 4034953344;
 	s = ft_strnew(4);
 	o4 = (c << 26) >> 26;
 	o3 = ((c >> 6) << 26) >> 26;

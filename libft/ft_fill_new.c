@@ -21,6 +21,5 @@ char	*ft_fill_new(int size, char c)
 	s = ft_strnew(size + 1);
 	while (i < size)
 		s[i++] = c;
-	s[i] = '\0';
 	return (s);
 }

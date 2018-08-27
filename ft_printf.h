@@ -21,9 +21,13 @@
 
 enum			e_ref{NONE, H, HH, L, LL, Z, J};
 
+enum			e_spec{NON, pc, s, c, d, i, o, u, x, xcaps, p};
+
 typedef struct	s_flags
 {
 	enum e_ref	ref;
+	enum e_spec	spec;
+	char		*mask;
 	int			hash;
 	int			zero;
 	int			minus;
@@ -32,7 +36,8 @@ typedef struct	s_flags
 	int			width;
 	int			precision;
 	int			size;
-	int 		cur;
+	int			cur;
+	int			neg;
 }				t_flags;
 
 int				ft_printf(char *format, ...);
@@ -41,6 +46,16 @@ t_flags			*init_flags();
 char			*get_flags(char *format, t_flags *flags);
 char			*get_ref(char *format, t_flags *flags);
 void			apply_format(char **str, t_flags *flags);
+
+void			change_str(char **res, t_flags *flags);
+void			perc_form(char **str, t_flags *flags);
+void			char_form(char **str, t_flags *flags);
+void			dec_form(char **str, t_flags *flags);
+void			oct_form(char **str, t_flags *flags);
+void			uns_form(char **str, t_flags *flags);
+void			hex_form(char **str, t_flags *flags);
+void			int_form(char **str, t_flags *flags);
+void			addr_form(char **str, t_flags *flags);
 
 char			*dec_type(va_list ap, t_flags *flags, int caps);
 char			*octal_type(va_list ap, t_flags *flags, int caps);
@@ -61,19 +76,23 @@ uintmax_t		power(uintmax_t num, int power);
 int				is_right(char c);
 char			*to_upper(char *s);
 
-void			plus(char **s);
-void			zero(char **s, int width);
+void			plus(char **s, t_flags *flags);
+void			zero(char **s, int width, t_flags *flags);
 void			space(char **s, t_flags *flags);
-void			hash(char **s, int hash);
-void			minus(char **s, t_flags *flags);
-
-int 			bit_count(unsigned int c);
+void			hash(char **s, t_flags *flags);
+void			hash_hex(char **s, int hash, t_flags *flags);
+void			space_before(char **s, t_flags *flags);
+int				is_zero(char *str);
+void			cut(char **s, t_flags *flags);
+int				bit_count(unsigned int c);
 void			ft_put_str(char *s, int size);
 char			*ft_stradd(char *s1, char *s2, int size1, int size2);
 
 char			*mask1(unsigned int c, t_flags *flags);
 char			*mask2(unsigned int c, t_flags *flags);
 char			*mask3(unsigned int c, t_flags *flags);
-char 			*mask4(unsigned int c, t_flags *flags);
+char			*mask4(unsigned int c, t_flags *flags, unsigned int mask);
+
+char			*per(t_flags *flags);
 
 #endif
