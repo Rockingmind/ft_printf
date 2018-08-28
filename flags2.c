@@ -27,7 +27,7 @@ void	cut(char **s, t_flags *flags)
 		i++;
 	}
 	flags->cur = flags->precision;
-	free(save);
+//	free(save);
 }
 
 int		is_zero(char *str)
@@ -61,5 +61,5 @@ void	hash_hex(char **s, int hash, t_flags *flags)
 		flags->cur += 2;
 		*s = ft_stradd("0x", save, 2, flags->cur);
 	}
-	free(save);
+//	free(save);
 }

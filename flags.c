@@ -23,7 +23,7 @@ void	plus(char **s, t_flags *flags)
 	else
 		*s = ft_stradd("-", save, 1, flags->cur);
 	flags->cur++;
-	free(save);
+//	free(save);
 }
 
 void	zero(char **s, int width, t_flags *flags)
@@ -38,7 +38,7 @@ void	zero(char **s, int width, t_flags *flags)
 		free(*s);
 		*s = ft_stradd(ft_fill_new(size, '0'), save, size, flags->cur);
 		flags->cur += size;
-		free(save);
+//		free(save);
 	}
 }
 
@@ -56,7 +56,7 @@ void	space(char **s, t_flags *flags)
 		else
 			*s = ft_stradd(ft_fill_new(size, ' '), save, size, flags->cur);
 		flags->cur += size;
-		free(save);
+//		free(save);
 	}
 }
 
@@ -69,7 +69,7 @@ void	space_before(char **s, t_flags *flags)
 		save = ft_strdup(*s);
 		free(*s);
 		*s = ft_stradd(" ", save, 1, flags->cur);
-		free(save);
+//		free(save);
 		flags->cur++;
 	}
 }
@@ -91,5 +91,5 @@ void	hash(char **s, t_flags *flags)
 		*s = ft_stradd("0", save, 1, 0);
 		flags->cur = 1;
 	}
-	free(save);
+//	free(save);
 }
