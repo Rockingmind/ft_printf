@@ -104,3 +104,9 @@ char	*get_flags(char *format, t_flags *flags)
 	return (get_ref(format, flags));
 }
 
+void	free_flags(t_flags **flags)
+{
+	free((*flags)->mask);
+	free(*flags);
+
+}

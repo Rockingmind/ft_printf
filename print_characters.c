@@ -92,8 +92,10 @@ char	*put_str_loc(wchar_t *s, t_flags *flags)
 		while (s[i])
 		{
 			str = ft_strdup(res);
+			free(res);
 			res = ft_stradd(str, put_char_loc(s[i++], flags), size, flags->cur);
 			size += flags->cur;
+			free(str);
 		}
 		flags->cur = size;
 	}
