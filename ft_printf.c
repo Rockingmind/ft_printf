@@ -97,7 +97,7 @@ int		process(va_list ap, char *format, char **res, int *size)
 	*size += flags->cur;
 //	free(save);
 //	free(add);
-	free_flags(flags);
+//	free_flags(flags);
 	return (ft_strlen(format) - ft_strlen(str));
 }
 
