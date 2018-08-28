@@ -12,6 +12,15 @@
 
 #include "ft_printf.h"
 
+char	*init_null_str(t_flags *flags)
+{
+	char *res;
+
+	res = ft_strdup("(null)");
+	flags->cur = 6;
+	return (res);
+}
+
 char	*put_char(char c, t_flags *flags)
 {
 	char *s;
@@ -27,10 +36,7 @@ char	*str_out(char *s, t_flags *flags)
 	char *str;
 
 	if (s == NULL)
-	{
-		str = ft_strdup("(null)");
-		flags->cur = 6;
-	}
+		str = init_null_str(flags);
 	else
 	{
 		str = ft_strdup(s);
@@ -54,15 +60,6 @@ char	*put_char_loc(wchar_t ch, t_flags *flags)
 		return (mask3(c, flags));
 	else
 		return (mask4(c, flags, 4034953344));
-}
-
-char	*init_null_str(t_flags *flags)
-{
-	char *res;
-
-	res = ft_strdup("(null)");
-	flags->cur = 6;
-	return (res);
 }
 
 char	*put_str_loc(wchar_t *s, t_flags *flags)
