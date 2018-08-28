@@ -20,14 +20,11 @@ char	*put_nbr_base(intmax_t num, int base, t_flags *flags)
 
 	i = 0;
 	size = count(num, base);
-	if (num < 0)
-		size++;
 	res = ft_strnew(size);
 	if (num < 0)
 	{
 		flags->neg = 1;
 		num *= -1;
-		size--;
 	}
 	while (size--)
 	{
@@ -36,7 +33,6 @@ char	*put_nbr_base(intmax_t num, int base, t_flags *flags)
 		i++;
 	}
 	flags->cur = i;
-	free(flags->mask);
 	return (res);
 }
 

@@ -63,7 +63,7 @@ void	dec_form(char **str, t_flags *flags)
 		zero(str, flags->precision, flags);
 	if (flags->zero == 1 && flags->minus == 0 && flags->precision == -1)
 	{
-		if (flags->space == 1 || flags->plus == 1)
+		if (flags->plus == 1 || flags->space == 1)
 			zero(str, flags->width - 1, flags);
 		else
 			zero(str, flags->width, flags);

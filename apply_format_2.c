@@ -41,6 +41,13 @@ void	hex_form(char **str, t_flags *flags)
 	}
 	if (flags->precision > -1)
 		zero(str, flags->precision, flags);
+	if (flags->zero == 1 && flags->minus == 0 && flags->precision == -1)
+	{
+		if (flags->hash == 1)
+			zero(str, flags->width - 2, flags);
+		else
+			zero(str, flags->width, flags);
+	}
 	if (flags->hash == 1)
 		hash_hex(str, 1, flags);
 	if (flags->cur < flags->width)

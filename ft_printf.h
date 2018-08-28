@@ -35,7 +35,6 @@ typedef struct	s_flags
 	int			space;
 	int			width;
 	int			precision;
-	int			size;
 	int			cur;
 	int			neg;
 }				t_flags;
@@ -73,7 +72,6 @@ char			*put_str_loc(wchar_t *s, t_flags *flags);
 int				count(intmax_t x, int base);
 int				u_count(uintmax_t x, int base);
 uintmax_t		power(uintmax_t num, int power);
-int				is_right(char c);
 char			*to_upper(char *s);
 
 void			plus(char **s, t_flags *flags);
@@ -94,5 +92,6 @@ char			*mask3(unsigned int c, t_flags *flags);
 char			*mask4(unsigned int c, t_flags *flags, unsigned int mask);
 
 char			*per(t_flags *flags);
+void			free_flags(t_flags *flags);
 
 #endif

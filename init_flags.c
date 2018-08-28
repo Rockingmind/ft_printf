@@ -26,8 +26,6 @@ t_flags	*init_flags(void)
 	flags->width = -1;
 	flags->precision = -1;
 	flags->space = 0;
-	flags->size = 0;
-	flags->size = 0;
 	flags->neg = 0;
 	flags->mask = ft_strdup("0123456789abcdef");
 	return (flags);
@@ -103,4 +101,10 @@ char	*get_flags(char *format, t_flags *flags)
 		format++;
 	}
 	return (get_ref(format, flags));
+}
+
+void	free_flags(t_flags *flags)
+{
+	free(flags->mask);
+	free(flags);
 }
