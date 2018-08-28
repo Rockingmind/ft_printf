@@ -19,7 +19,7 @@ void	cut(char **s, t_flags *flags)
 
 	i = 0;
 	save = ft_strdup(*s);
-	free(*s);
+//	free(*s);
 	*s = ft_strnew(flags->precision);
 	while (i < flags->precision)
 	{
