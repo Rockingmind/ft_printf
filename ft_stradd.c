@@ -47,12 +47,13 @@ char	*ft_stradd(char *s1, char *s2, int size1, int size2)
 void	ft_put_str(char *s, int size)
 {
 	int i;
+	char c;
 
 	i = 0;
 	while (i < size)
 	{
-		write(1, s, 1);
+		c = s[i];
+		write(1, &c, 1);
 		i++;
-		s++;
 	}
 }

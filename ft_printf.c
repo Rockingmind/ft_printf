@@ -76,15 +76,13 @@ void	spec(t_flags *flags, char ch)
 		flags->spec = xcaps;
 }
 
-int		process(va_list ap, char *format, char **res, int *size)
+int		process(va_list ap, char *format, int *size)
 {
 	char *add;
-	char *save;
 	char *str;
 	t_flags *flags;
 
 	flags = init_flags();
-	save = ft_strdup(*res);
 	str = get_flags(format + 1, flags);
 	spec(flags, *str);
 	add = find_type(ap, str, flags);
@@ -92,7 +90,7 @@ int		process(va_list ap, char *format, char **res, int *size)
 		change_str(&add, flags);
 	else
 		apply_format(&add, flags);
-	*res = ft_stradd(save, add, *size, flags->cur);
+	ft_put_str(add, flags->cur);
 	*size += flags->cur;
 	return (ft_strlen(format) - ft_strlen(str));
 }
@@ -100,27 +98,23 @@ int		process(va_list ap, char *format, char **res, int *size)
 int		ft_printf(char *format, ...)
 {
 	va_list	ap;
-	int		*size;
-	char	*result;
+	int		size;
 	int		i;
 
 	i = 0;
-	size = (int *)malloc(sizeof(int) * 1);
-	*size = 0;
-	result = ft_strnew(ft_strlen(format));
+	size = 0;
 	va_start(ap, format);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-			i += process(ap, format + i, &result, size);
+			i += process(ap, format + i, &size);
 		else
 		{
-			result[*size] = format[i];
-			(*size)++;
+			ft_putchar(format[i]);
+			size++;
 		}
 		i++;
 	}
 	va_end(ap);
-	ft_put_str(result, *size);
-	return (*size);
+	return (size);
 }
