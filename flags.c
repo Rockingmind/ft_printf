@@ -22,6 +22,7 @@ void	plus(char **s, t_flags *flags)
 	else
 		*s = ft_stradd("-", save, 1, flags->cur);
 	flags->cur++;
+	free(save);
 }
 
 void	zero(char **s, int width, t_flags *flags)
