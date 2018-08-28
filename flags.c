@@ -17,7 +17,7 @@ void	plus(char **s, t_flags *flags)
 	char *save;
 
 	save = ft_strdup(*s);
-	free(*s);
+//	free(*s);
 	if (flags->neg == 0)
 		*s = ft_stradd("+", save, 1, flags->cur);
 	else
@@ -35,7 +35,7 @@ void	zero(char **s, int width, t_flags *flags)
 	if (size > 0)
 	{
 		save = ft_strdup(*s);
-		free(*s);
+//		free(*s);
 		*s = ft_stradd(ft_fill_new(size, '0'), save, size, flags->cur);
 		flags->cur += size;
 //		free(save);
@@ -51,6 +51,7 @@ void	space(char **s, t_flags *flags)
 	if (size > 0)
 	{
 		save = ft_strdup(*s);
+//		free(*s);
 		if (flags->minus == 1)
 			*s = ft_stradd(save, ft_fill_new(size, ' '), flags->cur, size);
 		else
@@ -67,7 +68,7 @@ void	space_before(char **s, t_flags *flags)
 	if (**s != '-' && **s != '+')
 	{
 		save = ft_strdup(*s);
-		free(*s);
+//		free(*s);
 		*s = ft_stradd(" ", save, 1, flags->cur);
 //		free(save);
 		flags->cur++;
@@ -82,12 +83,12 @@ void	hash(char **s, t_flags *flags)
 	flags->cur += 1;
 	if (ft_atoi(save) != 0)
 	{
-		free(*s);
+//		free(*s);
 		*s = ft_stradd("0", save, 1, flags->cur);
 	}
 	else
 	{
-		free(*s);
+//		free(*s);
 		*s = ft_stradd("0", save, 1, 0);
 		flags->cur = 1;
 	}

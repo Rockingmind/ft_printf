@@ -85,7 +85,7 @@ int		process(va_list ap, char *format, char **res, int *size)
 
 	flags = init_flags();
 	save = ft_strdup(*res);
-	free(*res);
+//	free(*res);
 	str = get_flags(format + 1, flags);
 	spec(flags, *str);
 	add = find_type(ap, str, flags);
