@@ -58,6 +58,7 @@ void	dec_form(char **str, t_flags *flags)
 	if (is_zero(*str) && (flags->width == 0 || flags->precision == 0))
 	{
 		flags->cur = 0;
+		free(*str);
 		*str = ft_strnew(0);
 	}
 	if (flags->precision > -1)
@@ -82,6 +83,7 @@ void	oct_form(char **str, t_flags *flags)
 	if (is_zero(*str) && (flags->width == 0 || flags->precision == 0))
 	{
 		flags->cur = 0;
+		free(*str);
 		*str = ft_strnew(0);
 	}
 	if (flags->hash == 1)
