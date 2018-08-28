@@ -26,6 +26,7 @@ void	cut(char **s, t_flags *flags)
 		i++;
 	}
 	flags->cur = flags->precision;
+	free(save);
 }
 
 void	cut_scaps(char **s, t_flags *flags)
@@ -35,16 +36,18 @@ void	cut_scaps(char **s, t_flags *flags)
 	int 	diff;
 
 	i = 0;
-	if (flags->counter > 0) {
-	diff = flags->precision / flags->counter;
-
+	if (flags->counter > 0)
+	{
+		diff = flags->precision / flags->counter;
 		save = ft_strdup(*s);
 		*s = ft_strnew(flags->precision);
-		while (i < flags->counter * diff) {
+		while (i < flags->counter * diff)
+		{
 			*((*s) + i) = *(save + i);
 			i++;
 		}
 		flags->cur = flags->counter * diff;
+		free(save);
 	}
 }
 
@@ -77,4 +80,5 @@ void	hash_hex(char **s, int hash, t_flags *flags)
 		flags->cur += 2;
 		*s = ft_stradd("0x", save, 2, flags->cur);
 	}
+	free(save);
 }
