@@ -92,6 +92,5 @@ char			*mask3(unsigned int c, t_flags *flags);
 char			*mask4(unsigned int c, t_flags *flags, unsigned int mask);
 
 char			*per(t_flags *flags);
-void			free_flags(t_flags *flags);
 
 #endif
