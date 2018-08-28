@@ -41,18 +41,14 @@ char	*put_unsigned_nbr(uintmax_t num, int base, t_flags *flags)
 	int		size;
 	int		i;
 	char	*res;
-	char	*mask;
 
 	i = 0;
 	size = u_count(num, base);
 	flags->cur = size;
 	res = ft_strnew(size);
-	mask = ft_strdup("0123456789abcdef");
-	while (size--)
-	{
-		res[i++] = mask[num / power(base, size)];
+	while (size--) {
+		res[i++] = flags->mask[num / power(base, size)];
 		num %= power(base, size);
 	}
-	free(mask);
 	return (res);
 }
