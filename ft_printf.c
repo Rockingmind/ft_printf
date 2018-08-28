@@ -95,8 +95,8 @@ int		process(va_list ap, char *format, char **res, int *size)
 		apply_format(&add, flags);
 	*res = ft_stradd(save, add, *size, flags->cur);
 	*size += flags->cur;
-	free(save);
-	free(add);
+//	free(save);
+//	free(add);
 	free_flags(flags);
 	return (ft_strlen(format) - ft_strlen(str));
 }
@@ -126,6 +126,6 @@ int		ft_printf(char *format, ...)
 	}
 	va_end(ap);
 	ft_put_str(result, *size);
-	free(result);
+//	free(result);
 	return (*size);
 }
