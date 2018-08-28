@@ -21,7 +21,7 @@
 
 enum			e_ref{NONE, H, HH, L, LL, Z, J};
 
-enum			e_spec{NON, pc, s, c, d, i, o, u, x, xcaps, p};
+enum			e_spec{NON, pc, s, scaps, c, d, i, o, u, x, xcaps, p};
 
 typedef struct	s_flags
 {
@@ -37,6 +37,7 @@ typedef struct	s_flags
 	int			precision;
 	int			cur;
 	int			neg;
+	int 		counter;
 }				t_flags;
 
 int				ft_printf(char *format, ...);
@@ -82,6 +83,7 @@ void			hash_hex(char **s, int hash, t_flags *flags);
 void			space_before(char **s, t_flags *flags);
 int				is_zero(char *str);
 void			cut(char **s, t_flags *flags);
+void			cut_scaps(char **s, t_flags *flags);
 int				bit_count(unsigned int c);
 void			ft_put_str(char *s, int size);
 char			*ft_stradd(char *s1, char *s2, int size1, int size2);

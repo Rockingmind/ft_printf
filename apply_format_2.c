@@ -89,7 +89,14 @@ void	addr_form(char **str, t_flags *flags)
 {
 	int size;
 
-	if (flags->zero == 1 && flags->minus == 0 && flags->precision == -1)
+	if (is_zero(*str) && flags->precision == 0)
+	{
+		flags->cur = 0;
+		*str = ft_strnew(0);
+	}
+	else if (flags->precision > 0)
+		zero(str, flags->precision, flags);
+	if ((flags->zero == 1 && flags->minus == 0 && flags->precision == -1))
 	{
 		size = flags->width - 2;
 		zero(str, size, flags);

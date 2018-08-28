@@ -26,7 +26,9 @@ void	perc_form(char **str, t_flags *flags)
 
 void	change_str(char **res, t_flags *flags)
 {
-	if (flags->precision > -1 && flags->precision < flags->cur)
+	if (flags->spec == scaps && flags->precision > -1 && flags->precision < flags->cur)
+		cut_scaps(res, flags);
+	if (flags->precision > -1 && flags->precision < flags->cur && flags->spec != NON)
 		cut(res, flags);
 	if (flags->width > 0 || flags->zero == 1 || flags->minus == 1)
 	{

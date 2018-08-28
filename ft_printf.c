@@ -64,8 +64,10 @@ void	spec(t_flags *flags, char ch)
 		flags->spec = u;
 	else if (ch == 'c' || ch == 'C')
 		flags->spec = c;
-	else if (ch == 's' || ch == 'S')
+	else if (ch == 's')
 		flags->spec = s;
+	else if (ch == 'S')
+		flags->spec = scaps;
 	else if (ch == '%')
 		flags->spec = pc;
 	else if (ch == 'p')
@@ -86,7 +88,7 @@ int		process(va_list ap, char *format, int *size)
 	str = get_flags(format + 1, flags);
 	spec(flags, *str);
 	add = find_type(ap, str, flags);
-	if (flags->spec == s)
+	if (flags->spec == s || flags->spec == NON || flags->spec == scaps)
 		change_str(&add, flags);
 	else
 		apply_format(&add, flags);

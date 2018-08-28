@@ -40,7 +40,7 @@ int		get_nums(char *format, t_flags *flags)
 	{
 		format++;
 		flags->precision = ft_atoi(format);
-		num = ft_count_digits(flags->precision + 1);
+		num = ft_count_digits(flags->precision);
 	}
 	else if (ft_isdigit(*format))
 	{

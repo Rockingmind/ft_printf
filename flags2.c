@@ -28,6 +28,26 @@ void	cut(char **s, t_flags *flags)
 	flags->cur = flags->precision;
 }
 
+void	cut_scaps(char **s, t_flags *flags)
+{
+	char	*save;
+	int		i;
+	int 	diff;
+
+	i = 0;
+	if (flags->counter > 0) {
+	diff = flags->precision / flags->counter;
+
+		save = ft_strdup(*s);
+		*s = ft_strnew(flags->precision);
+		while (i < flags->counter * diff) {
+			*((*s) + i) = *(save + i);
+			i++;
+		}
+		flags->cur = flags->counter * diff;
+	}
+}
+
 int		is_zero(char *str)
 {
 	while (*str != '\0')

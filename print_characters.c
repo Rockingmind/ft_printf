@@ -53,13 +53,26 @@ char	*put_char_loc(wchar_t ch, t_flags *flags)
 	size = bit_count(ch);
 	c = (unsigned int)ch;
 	if (size <= 7 || MB_CUR_MAX < 2)
+	{
+		flags->counter = 1;
 		return (mask1(c, flags));
+	}
 	else if (size <= 11 || MB_CUR_MAX < 3)
+	{
+		flags->counter = 2;
 		return (mask2(c, flags));
+	}
 	else if (size <= 16 || MB_CUR_MAX < 4)
+	{
+		flags->counter = 3;
 		return (mask3(c, flags));
+	}
 	else
+	{
+		flags->counter = 4;
 		return (mask4(c, flags, 4034953344));
+	}
+
 }
 
 char	*put_str_loc(wchar_t *s, t_flags *flags)
