@@ -15,8 +15,9 @@
 void	plus(char **s, t_flags *flags)
 {
 	char *save;
-	
+
 	save = ft_strdup(*s);
+	free(*s);
 	if (flags->neg == 0)
 		*s = ft_stradd("+", save, 1, flags->cur);
 	else
