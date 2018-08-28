@@ -27,6 +27,7 @@ t_flags	*init_flags(void)
 	flags->precision = -1;
 	flags->space = 0;
 	flags->neg = 0;
+	flags->counter = 0;
 	flags->mask = ft_strdup("0123456789abcdef");
 	return (flags);
 }

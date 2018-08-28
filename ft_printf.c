@@ -95,6 +95,7 @@ int		process(va_list ap, char *format, int *size)
 	ft_put_str(add, flags->cur);
 	*size += flags->cur;
 	free(add);
+	free(flags);
 	return (ft_strlen(format) - ft_strlen(str));
 }
 
