@@ -67,7 +67,7 @@ char			*put_unsigned_nbr(uintmax_t num, int base, t_flags *flags);
 
 char			*str_out(char *s, t_flags *flags);
 char			*put_char(char c, t_flags *flags);
-char			*put_char_loc(wchar_t c, t_flags *flags);
+void			put_char_loc(wchar_t ch, char **s, t_flags *flags);
 char			*put_str_loc(wchar_t *s, t_flags *flags);
 
 int				count(intmax_t x, int base);
@@ -88,10 +88,10 @@ int				bit_count(unsigned int c);
 void			ft_put_str(char *s, int size);
 char			*ft_stradd(char *s1, char *s2, int size1, int size2);
 
-char			*mask1(unsigned int c, t_flags *flags);
-char			*mask2(unsigned int c, t_flags *flags);
-char			*mask3(unsigned int c, t_flags *flags);
-char			*mask4(unsigned int c, t_flags *flags, unsigned int mask);
+void			mask1(char **s, unsigned int c, t_flags *flags);
+void			mask2(char **s, unsigned int c, t_flags *flags);
+void			mask3(char **s, unsigned int c, t_flags *flags);
+void			mask4(char **s, unsigned int c, t_flags *flags, unsigned int mask);
 
 char			*per(t_flags *flags);
 void			free_flags(t_flags **flags);

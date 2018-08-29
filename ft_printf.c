@@ -14,12 +14,13 @@
 
 char	*get_spec(va_list ap, char *str, t_flags *flags)
 {
-	if (*str == 's' && flags->ref != L)
-		return (str_out(va_arg(ap, char *), flags));
-	else if (*str == 'S' || (*str == 's' && flags->ref == L))
-		return (put_str_loc(va_arg(ap, wchar_t *), flags));
-	else if (*str == 'C' || (*str == 'c' && flags->ref == L))
-		return (put_char_loc(va_arg(ap, wchar_t), flags));
+	char *s;
+
+	if (*str == 'C' || (*str == 'c' && flags->ref == L))
+	{
+		put_char_loc(va_arg(ap, wchar_t), &s, flags);
+		return (s);
+	}
 	else if (*str == 'c')
 		return (put_char((char)va_arg(ap, int), flags));
 	else if (*str == 'p')
@@ -30,6 +31,11 @@ char	*get_spec(va_list ap, char *str, t_flags *flags)
 		return (unsigned_type(ap, flags, 1));
 	else if (*str == '%')
 		return (per(flags));
+	else if (ft_strlen(str) == 0)
+	{
+		flags->cur = 0;
+		return (NULL);
+	}
 	else
 		return (put_char(*str, flags));
 }
@@ -48,6 +54,10 @@ char	*find_type(va_list ap, char *str, t_flags *flags)
 		return (hex_type(ap, flags, 0));
 	else if (*str == 'X')
 		return (to_upper(hex_type(ap, flags, 0)));
+	else if (*str == 's' && flags->ref != L)
+		return (str_out(va_arg(ap, char *), flags));
+	else if (*str == 'S' || (*str == 's' && flags->ref == L))
+		return (put_str_loc(va_arg(ap, wchar_t *), flags));
 	else
 		return (get_spec(ap, str, flags));
 }
@@ -80,9 +90,10 @@ void	spec(t_flags *flags, char ch)
 
 int		process(va_list ap, char *format, int *size)
 {
-	char *add;
-	char *str;
-	t_flags *flags;
+	char	*add;
+	char	*str;
+	t_flags	*flags;
+	int		diff;
 
 	flags = init_flags();
 	str = get_flags(format + 1, flags);
@@ -94,21 +105,24 @@ int		process(va_list ap, char *format, int *size)
 		apply_format(&add, flags);
 	ft_put_str(add, flags->cur);
 	*size += flags->cur;
+	diff = ft_strlen(format) - ft_strlen(str);
 	free(add);
 	free_flags(&flags);
-	return (ft_strlen(format) - ft_strlen(str));
+	return (diff);
 }
 
 int		ft_printf(char *format, ...)
 {
 	va_list	ap;
+	int 	format_size;
 	int		size;
 	int		i;
 
 	i = 0;
 	size = 0;
+	format_size = (int)ft_strlen(format);
 	va_start(ap, format);
-	while (format[i] != '\0')
+	while (format[i] != '\0' && i < format_size)
 	{
 		if (format[i] == '%')
 			i += process(ap, format + i, &size);

@@ -50,7 +50,7 @@ void	ft_put_str(char *s, int size)
 	char c;
 
 	i = 0;
-	while (i < size)
+	while (i < size && s != NULL)
 	{
 		c = s[i];
 		write(1, &c, 1);

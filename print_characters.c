@@ -45,7 +45,7 @@ char	*str_out(char *s, t_flags *flags)
 	return (str);
 }
 
-char	*put_char_loc(wchar_t ch, t_flags *flags)
+void	put_char_loc(wchar_t ch, char **s, t_flags *flags)
 {
 	int				size;
 	unsigned int	c;
@@ -55,24 +55,23 @@ char	*put_char_loc(wchar_t ch, t_flags *flags)
 	if (size <= 7 || MB_CUR_MAX < 2)
 	{
 		flags->counter = 1;
-		return (mask1(c, flags));
+		mask1(s, c, flags);
 	}
 	else if (size <= 11 || MB_CUR_MAX < 3)
 	{
 		flags->counter = 2;
-		return (mask2(c, flags));
+		mask2(s, c, flags);
 	}
 	else if (size <= 16 || MB_CUR_MAX < 4)
 	{
 		flags->counter = 3;
-		return (mask3(c, flags));
+		mask3(s, c, flags);
 	}
 	else
 	{
 		flags->counter = 4;
-		return (mask4(c, flags, 4034953344));
+		mask4(s, c, flags, 4034953344);
 	}
-
 }
 
 char	*put_str_loc(wchar_t *s, t_flags *flags)
@@ -81,6 +80,7 @@ char	*put_str_loc(wchar_t *s, t_flags *flags)
 	int		size;
 	char	*res;
 	char	*str;
+	char	*save;
 
 	size = 0;
 	i = 0;
@@ -93,9 +93,11 @@ char	*put_str_loc(wchar_t *s, t_flags *flags)
 		{
 			str = ft_strdup(res);
 			free(res);
-			res = ft_stradd(str, put_char_loc(s[i++], flags), size, flags->cur);
+			put_char_loc(s[i++], &save, flags);
+			res = ft_stradd(str, save, size, flags->cur);
 			size += flags->cur;
 			free(str);
+			free(save);
 		}
 		flags->cur = size;
 	}

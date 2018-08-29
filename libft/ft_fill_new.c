@@ -12,14 +12,12 @@
 
 #include "includes/libft.h"
 
-char	*ft_fill_new(int size, char c)
+void	ft_fill_new(char **s, int size, char c)
 {
-	char	*s;
 	int		i;
 
 	i = 0;
-	s = ft_strnew(size + 1);
+	*s = ft_strnew(size + 1);
 	while (i < size)
-		s[i++] = c;
-	return (s);
+		(*s)[i++] = c;
 }

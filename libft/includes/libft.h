@@ -101,6 +101,6 @@ size_t				ft_count_mass_el(void **mass);
 void				ft_del_mas(void **mass);
 int					ft_writetil(char **dest, char *src, char sym);
 int					ft_count_digits(int n);
-char				*ft_fill_new(int size, char c);
+void				ft_fill_new(char **s, int size, char c);
 
 #endif
