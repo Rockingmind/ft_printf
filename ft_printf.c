@@ -114,7 +114,7 @@ int		process(va_list ap, char *format, int *size)
 int		ft_printf(char *format, ...)
 {
 	va_list	ap;
-	int 	format_size;
+	int		format_size;
 	int		size;
 	int		i;
 

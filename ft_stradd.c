@@ -46,8 +46,8 @@ char	*ft_stradd(char *s1, char *s2, int size1, int size2)
 
 void	ft_put_str(char *s, int size)
 {
-	int i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
 	while (i < size && s != NULL)

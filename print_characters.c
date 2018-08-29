@@ -96,8 +96,7 @@ char	*put_str_loc(wchar_t *s, t_flags *flags)
 			put_char_loc(s[i++], &save, flags);
 			res = ft_stradd(str, save, size, flags->cur);
 			size += flags->cur;
-			free(str);
-			free(save);
+			free_all(&str, &save);
 		}
 		flags->cur = size;
 	}

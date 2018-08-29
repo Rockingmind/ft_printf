@@ -34,7 +34,7 @@ void	cut_scaps(char **s, t_flags *flags)
 {
 	char	*save;
 	int		i;
-	int 	diff;
+	int		diff;
 
 	i = 0;
 	if (flags->counter > 0)
@@ -85,4 +85,10 @@ void	hash_hex(char **s, int hash, t_flags *flags)
 		*s = ft_stradd("0x", save, 2, flags->cur);
 	}
 	free(save);
+}
+
+void	free_all(char **s, char **b)
+{
+	free(*s);
+	free(*b);
 }

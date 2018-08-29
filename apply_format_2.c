@@ -43,7 +43,7 @@ void	hex_form(char **str, t_flags *flags)
 		zero(str, flags->precision, flags);
 	if (flags->zero == 1 && flags->minus == 0 && flags->precision == -1)
 	{
-		if (flags->hash == 1)
+		if (flags->hash == 1 && ft_atoi(*str) != 0 && flags->spec != p)
 			zero(str, flags->width - 2, flags);
 		else
 			zero(str, flags->width, flags);
@@ -51,12 +51,7 @@ void	hex_form(char **str, t_flags *flags)
 	if (flags->hash == 1)
 		hash_hex(str, 1, flags);
 	if (flags->cur < flags->width)
-	{
-		if (flags->zero == 1 && flags->minus == 0 && flags->precision == -1)
-			zero(str, flags->width, flags);
-		else
-			space(str, flags);
-	}
+		space(str, flags);
 	if (flags->spec == xcaps)
 		to_upper(*str);
 }

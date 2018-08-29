@@ -37,7 +37,7 @@ typedef struct	s_flags
 	int			precision;
 	int			cur;
 	int			neg;
-	int 		counter;
+	int			counter;
 }				t_flags;
 
 int				ft_printf(char *format, ...);
@@ -91,9 +91,11 @@ char			*ft_stradd(char *s1, char *s2, int size1, int size2);
 void			mask1(char **s, unsigned int c, t_flags *flags);
 void			mask2(char **s, unsigned int c, t_flags *flags);
 void			mask3(char **s, unsigned int c, t_flags *flags);
-void			mask4(char **s, unsigned int c, t_flags *flags, unsigned int mask);
+void			mask4(char **s, unsigned int c, t_flags *flags,
+					unsigned int mask);
 
 char			*per(t_flags *flags);
 void			free_flags(t_flags **flags);
+void			free_all(char **s, char **b);
 
 #endif

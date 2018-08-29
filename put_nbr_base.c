@@ -46,7 +46,8 @@ char	*put_unsigned_nbr(uintmax_t num, int base, t_flags *flags)
 	size = u_count(num, base);
 	flags->cur = size;
 	res = ft_strnew(size);
-	while (size--) {
+	while (size--)
+	{
 		res[i++] = flags->mask[num / power(base, size)];
 		num %= power(base, size);
 	}

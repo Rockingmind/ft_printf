@@ -108,5 +108,4 @@ void	free_flags(t_flags **flags)
 {
 	free((*flags)->mask);
 	free(*flags);
-
 }
